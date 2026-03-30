@@ -1,0 +1,6 @@
+alias gs="git status -s"
+alias gco="git commit -m"
+alias gam="git commit -m --amend"
+alias gpr="git pull --rebase"
+alias gbu="git branch -u"
+alias gcom="git checkout master"

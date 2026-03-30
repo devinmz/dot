@@ -1,0 +1,8 @@
+source "$_Z/me/vk.zsh"
+source "$_Z/me/cursor.zsh"
+source "$_Z/me/zoxide.zsh"
+source "$_Z/me/git.zsh"
+source "$_Z/me/beautify.zsh"
+source "$_Z/me/starship.zsh"
+source "$_Z/me/zsh.zsh"
+source "$_Z/me/vim.zsh"
