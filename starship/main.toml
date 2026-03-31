@@ -3,7 +3,13 @@
 
 command_timeout = 1000
 right_format = """$time"""
-format = "$directory$custom$all"
+format = "$shlvl$directory$custom$all"
+
+[shlvl]
+symbol = "🧱 "
+style = "fg:black bg:#ad4007"
+format = "[](fg:black bg:#ad4007)[$symbol$shlvl]($style)[](fg:#ad4007 bg:black)"
+disabled = false
 
 [time]
 disabled = false
@@ -27,7 +33,7 @@ format = "[](fg:black bg:#f9a600)[锟斤拷$duration](bg:$style fg:black)[
 style = "#c05303"
 truncate_to_repo = false
 fish_style_pwd_dir_length = 1
-format = "[](fg:black bg:#c05303)[$path[$read_only](bg:$style fg:black)](bg:$style fg:black)[](fg:$style)"
+format = "[](fg:black bg:#c05303)[$path[$read_only](bg:$style fg:black)](bg:$style fg:black)[](fg:$style bg:black)"
 read_only = " "
 
 [docker_context]
@@ -59,20 +65,20 @@ else
 fi
 '''
 when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
-format = "[](fg:black bg:$style)[$output](fg:black bg:$style)[](fg:$style)"
+format = "[](fg:black bg:$style)[$output](fg:black bg:$style)[](fg:$style bg:black)"
 
 
 [git_commit]
 style = "#d8712c"
-format = "\b[ ](bg:$style)[\\($hash$tag\\)](fg:black bg:$style)[](fg:$style)"
+format = "\b[ ](bg:$style)[\\($hash$tag\\)](fg:black bg:$style)[](fg:$style bg:black)"
 
 [git_state]
 style = "#d8712c"
-format = "\b[ ](bg:$style)[ \\($state( $progress_current/$progress_total)\\)](fg:black bg:$style)[](fg:$style)"
+format = "\b[ ](bg:$style)[ \\($state( $progress_current/$progress_total)\\)](fg:black bg:$style)[](fg:$style bg:black)"
 
 [git_status]
 style = "#d8712c"
-format = "(\b[ ](bg:$style fg:black)$conflicted$staged$modified$renamed$deleted$untracked$stashed$ahead_behind[](fg:$style))"
+format = "(\b[ ](bg:$style fg:black)$conflicted$staged$modified$renamed$deleted$untracked$stashed$ahead_behind[](fg:$style bg:black))"
 conflicted = "[ ](bold fg:88 bg:#d8712c)[  ${count} ](fg:black bg:#d8712c)"
 staged = "[ $count ](fg:black bg:#d8712c)"
 modified = "[ ${count} ](fg:black bg:#d8712c)"
@@ -155,11 +161,6 @@ bash_indicator = "bash "
 zsh_indicator = "zsh "
 powershell_indicator = ""
 format = "[$indicator](fg:#ad4007)"
-disabled = false
-[shlvl]
-symbol = " "
-style = "fg:black bg:#ad4007"
-format = "[](fg:black bg:#ad4007)[$symbol$shlvl]($style)[](fg:#ad4007)"
 disabled = false
 
 [terraform]
