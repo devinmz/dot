@@ -19,7 +19,10 @@ end
 for _, mode in ipairs({ "n", "x", "o" }) do
     map(mode, "n", "j")  -- 物理 j 位置 -> 向下
     map(mode, "e", "k")  -- 物理 k 位置 -> 向上
-    map(mode, "i", "l")  -- 物理 l 位置 -> 向右
+    -- 保留 operator-pending 模式下的 `i` 文本对象（如 `diw`/`ciw`）
+    if mode ~= "o" then
+        map(mode, "i", "l")  -- 物理 l 位置 -> 向右
+    end
 
     -- map(mode, "N", "J")  -- 合并行
     -- map(mode, "E", "K")  -- 查看文档
