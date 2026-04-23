@@ -20,12 +20,17 @@ require("lazy").setup({
             "catppuccin/nvim",
             name = "catppuccin",
             opts = {
-                transparent_background = true
-            },
-            integrations = {
-                treesitter = true,
-                native_lsp = {
-                  enabled = true,
+                transparent_background = true,
+                integrations = {
+                    treesitter = true,
+                    native_lsp = {
+                        enabled = true,
+                    },
+                    indent_blankline = {
+                        enabled = true,
+                        colored_indent_levels = true,
+                        scope_color = "lavender",
+                    },
                 },
             },
             config = function (_, opts)
@@ -85,6 +90,15 @@ require("lazy").setup({
                     vim.keymap.set("n", "n", "j", opts("Cursor Down"))
                     vim.keymap.set("n", "e", "k", opts("Cursor Up"))
                     vim.keymap.set("n", "i", "l", opts("Cursor Right"))
+
+                    -- 移除可能与自定义映射冲突的默认键
+                    pcall(vim.keymap.del, "n", "-", { buffer = bufnr })
+                    pcall(vim.keymap.del, "n", "t", { buffer = bufnr })
+
+                    -- 打开方式：- 水平分屏，= 垂直分屏，t 新 tab
+                    vim.keymap.set("n", "-", api.node.open.horizontal, opts("Open: Horizontal Split"))
+                    vim.keymap.set("n", "=", api.node.open.vertical, opts("Open: Vertical Split"))
+                    vim.keymap.set("n", "t", api.node.open.tab, opts("Open: New Tab"))
                 end
 
                 require("nvim-tree").setup({
@@ -105,6 +119,19 @@ require("lazy").setup({
 
                 vim.keymap.set("n", "<leader>t", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
                 vim.keymap.set("n", "<leader>ft", "<cmd>NvimTreeFocus<CR>", { desc = "Focus NvimTree" })
+            end,
+        },
+
+        -- 文件重命名/移动时同步 LSP 导入与引用
+        {
+            "antosha417/nvim-lsp-file-operations",
+            lazy = false,
+            dependencies = {
+                "nvim-lua/plenary.nvim",
+                "nvim-tree/nvim-tree.lua",
+            },
+            config = function()
+                require("lsp-file-operations").setup()
             end,
         },
 
@@ -221,6 +248,28 @@ require("lazy").setup({
             config = function()
                 local lspconfig = require("lspconfig")
 
+                -- 全局 LSP 键位（保留 ; 作为 leader），避免在未挂载 LSP 时退化为普通按键
+                vim.keymap.set("n", "<leader>l", "<Nop>", { noremap = true, silent = true, desc = "LSP Prefix" })
+
+                local function with_lsp(action)
+                    return function()
+                        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+                        if #clients == 0 then
+                            vim.notify("当前 buffer 未挂载 LSP", vim.log.levels.WARN)
+                            return
+                        end
+                        action()
+                    end
+                end
+
+                vim.keymap.set("n", "<leader>lh", with_lsp(vim.lsp.buf.hover), { noremap = true, silent = true, desc = "LSP Hover" })
+                vim.keymap.set("n", "<leader>ld", with_lsp(vim.lsp.buf.definition), { noremap = true, silent = true, desc = "LSP Definition" })
+                vim.keymap.set("n", "<leader>lr", with_lsp(vim.lsp.buf.references), { noremap = true, silent = true, desc = "LSP References" })
+                vim.keymap.set("n", "<leader>ln", with_lsp(vim.lsp.buf.rename), { noremap = true, silent = true, desc = "LSP Rename" })
+                vim.keymap.set("n", "<leader>la", with_lsp(vim.lsp.buf.code_action), { noremap = true, silent = true, desc = "LSP Code Action" })
+                vim.keymap.set("n", "<leader>lf", with_lsp(vim.lsp.buf.format), { noremap = true, silent = true, desc = "LSP Format" })
+                vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { noremap = true, silent = true, desc = "LSP Diagnostic Float" })
+
                 -- 通用 on_attach
                 local on_attach = function(client, bufnr)
                     local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -312,6 +361,63 @@ require("lazy").setup({
             },
         },
 
+        -- Debugprint
+        {
+            "andrewferrier/debugprint.nvim",
+            version = "*",
+            lazy = false,
+            dependencies = { "folke/snacks.nvim" },
+            opts = {
+                picker = "snacks.picker",
+                filetypes = {
+                    ["javascript"] = {
+                        left = 'console.log("',
+                        right = '")',
+                        mid_var = '", ',
+                        right_var = ")",
+                    },
+                    ["javascriptreact"] = {
+                        left = 'console.log("',
+                        right = '")',
+                        mid_var = '", ',
+                        right_var = ")",
+                    },
+                    ["typescript"] = {
+                        left = 'console.log("',
+                        right = '")',
+                        mid_var = '", ',
+                        right_var = ")",
+                    },
+                    ["typescriptreact"] = {
+                        left = 'console.log("',
+                        right = '")',
+                        mid_var = '", ',
+                        right_var = ")",
+                    },
+                },
+                keymaps = {
+                    normal = {
+                        plain_below = false,
+                        plain_above = false,
+                        surround_plain = false,
+                        variable_below = "<leader>dv",
+                        variable_above = "<leader>dV",
+                        textobj_below = "<leader>do",
+                        textobj_above = "<leader>dO",
+                        textobj_surround = "<leader>dso",
+                        variable_below_alwaysprompt = false,
+                        variable_above_alwaysprompt = false,
+                        delete_debug_prints = "<leader>dd",
+                        toggle_comment_debug_prints = "<leader>dc",
+                    },
+                    insert = {
+                        plain = false,
+                        variable = "<C-g>v",
+                    },
+                },
+            },
+        },
+
         -- 缩进线
         {
             "lukas-reineke/indent-blankline.nvim",
@@ -322,12 +428,22 @@ require("lazy").setup({
                     indent = {
                         char = "│",
                         tab_char = "│",
+                        highlight = {
+                            "RainbowRed",
+                            "RainbowYellow",
+                            "RainbowBlue",
+                            "RainbowOrange",
+                            "RainbowGreen",
+                            "RainbowViolet",
+                            "RainbowCyan",
+                        },
                     },
                     scope = {
                         enabled = true,
                         char = "│",
                         show_start = true,
                         show_end = true,
+                        highlight = "IblScope",
                     },
                     exclude = {
                         filetypes = {
@@ -362,11 +478,26 @@ require("lazy").setup({
                         end,
                     },
                     mapping = cmp.mapping.preset.insert({
-                        ["<C-n>"] = cmp.mapping.select_next_item(),
-                        ["<C-e>"] = cmp.mapping.select_prev_item(),
+                        ["<Tab>"] = cmp.mapping(function(fallback)
+                            if cmp.visible() then
+                                cmp.select_next_item()
+                            elseif luasnip.expand_or_jumpable() then
+                                luasnip.expand_or_jump()
+                            else
+                                fallback()
+                            end
+                        end, { "i", "s" }),
+                        ["<S-Tab>"] = cmp.mapping(function(fallback)
+                            if cmp.visible() then
+                                cmp.select_prev_item()
+                            elseif luasnip.jumpable(-1) then
+                                luasnip.jump(-1)
+                            else
+                                fallback()
+                            end
+                        end, { "i", "s" }),
                         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
                         ["<C-Space>"] = cmp.mapping.complete(),
-                        ["<Esc>"] = cmp.mapping.abort(),
                     }),
                     sources = cmp.config.sources({
                         { name = "nvim_lsp" },

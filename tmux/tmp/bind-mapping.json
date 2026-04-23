@@ -1,0 +1,560 @@
+{
+  "version": 3,
+  "generated_at": "2026-04-23T10:37:18.743048+00:00",
+  "config_root": "/Users/iuwoo_pro/devin.m/dotfiles/tmux",
+  "bindings": [
+    {
+      "module": "core.bindings",
+      "key": "r",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Reload tmux config via registry-driven unbind and regenerate flow.",
+      "command": "run-shell \"python3 ~/.config/tmux/module/core/bind_registry.py reload\"",
+      "rendered": "bind r run-shell \"python3 ~/.config/tmux/module/core/bind_registry.py reload\"",
+      "unbind_command": [
+        "unbind",
+        "r"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "G",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a session name and create a session in the current pane path.",
+      "command": "command-prompt -p \"Session name:\" \"run-shell \\\"~/.config/tmux/module/session/create_session.sh '%%' #{q:session_id} #{q:pane_current_path}\\\"\"",
+      "rendered": "bind G command-prompt -p \"Session name:\" \"run-shell \\\"~/.config/tmux/module/session/create_session.sh '%%' #{q:session_id} #{q:pane_current_path}\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "G"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "X",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Kill the current session after switching to the previous ordered session.",
+      "command": "confirm-before -p \"Kill session #S & switch to previous? (y/n)\" \"run-shell \\\"~/.config/tmux/module/session/kill_session.sh\\\"\"",
+      "rendered": "bind X confirm-before -p \"Kill session #S & switch to previous? (y/n)\" \"run-shell \\\"~/.config/tmux/module/session/kill_session.sh\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "X"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "k",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Kill the current tmux session with confirmation.",
+      "command": "confirm-before -p \"kill session #S? (y/n)\" kill-session",
+      "rendered": "bind k confirm-before -p \"kill session #S? (y/n)\" kill-session",
+      "unbind_command": [
+        "unbind",
+        "k"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "d",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Detach the current tmux client.",
+      "command": "detach-client",
+      "rendered": "bind d detach-client",
+      "unbind_command": [
+        "unbind",
+        "d"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "M-s",
+      "table": "root",
+      "repeatable": false,
+      "description": "Open the interactive session chooser.",
+      "command": "run-shell \"~/.config/tmux/module/session/switch_session_menu.sh\"",
+      "rendered": "bind -n M-s run-shell \"~/.config/tmux/module/session/switch_session_menu.sh\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "M-s"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-1",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 1-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 1\"",
+      "rendered": "bind -n C-1 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 1\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-1"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-2",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 2-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 2\"",
+      "rendered": "bind -n C-2 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 2\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-2"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-3",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 3-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 3\"",
+      "rendered": "bind -n C-3 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 3\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-3"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-4",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 4-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 4\"",
+      "rendered": "bind -n C-4 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 4\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-4"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-5",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 5-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 5\"",
+      "rendered": "bind -n C-5 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 5\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-5"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-6",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 6-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 6\"",
+      "rendered": "bind -n C-6 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 6\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-6"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-7",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 7-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 7\"",
+      "rendered": "bind -n C-7 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 7\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-7"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-8",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 8-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 8\"",
+      "rendered": "bind -n C-8 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 8\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-8"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-9",
+      "table": "root",
+      "repeatable": false,
+      "description": "Switch to the session whose name starts with 9-.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 9\"",
+      "rendered": "bind -n C-9 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 9\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-9"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "C",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a window name and create it in the current pane path.",
+      "command": "command-prompt -p \"窗口名:\" \"new-window -c '#{pane_current_path}' -n '%%'\"",
+      "rendered": "bind C command-prompt -p \"窗口名:\" \"new-window -c '#{pane_current_path}' -n '%%'\"",
+      "unbind_command": [
+        "unbind",
+        "C"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "1",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 1.",
+      "command": "select-window -t :1",
+      "rendered": "bind 1 select-window -t :1",
+      "unbind_command": [
+        "unbind",
+        "1"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "2",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 2.",
+      "command": "select-window -t :2",
+      "rendered": "bind 2 select-window -t :2",
+      "unbind_command": [
+        "unbind",
+        "2"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "3",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 3.",
+      "command": "select-window -t :3",
+      "rendered": "bind 3 select-window -t :3",
+      "unbind_command": [
+        "unbind",
+        "3"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "4",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 4.",
+      "command": "select-window -t :4",
+      "rendered": "bind 4 select-window -t :4",
+      "unbind_command": [
+        "unbind",
+        "4"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "5",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 5.",
+      "command": "select-window -t :5",
+      "rendered": "bind 5 select-window -t :5",
+      "unbind_command": [
+        "unbind",
+        "5"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "6",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 6.",
+      "command": "select-window -t :6",
+      "rendered": "bind 6 select-window -t :6",
+      "unbind_command": [
+        "unbind",
+        "6"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "7",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 7.",
+      "command": "select-window -t :7",
+      "rendered": "bind 7 select-window -t :7",
+      "unbind_command": [
+        "unbind",
+        "7"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "8",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 8.",
+      "command": "select-window -t :8",
+      "rendered": "bind 8 select-window -t :8",
+      "unbind_command": [
+        "unbind",
+        "8"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "9",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Switch to window 9.",
+      "command": "select-window -t :9",
+      "rendered": "bind 9 select-window -t :9",
+      "unbind_command": [
+        "unbind",
+        "9"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "-",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Split the current pane vertically.",
+      "command": "split-window -v -c \"#{pane_current_path}\"",
+      "rendered": "bind - split-window -v -c \"#{pane_current_path}\"",
+      "unbind_command": [
+        "unbind",
+        "-"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "=",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Split the current pane horizontally.",
+      "command": "split-window -h -c \"#{pane_current_path}\"",
+      "rendered": "bind = split-window -h -c \"#{pane_current_path}\"",
+      "unbind_command": [
+        "unbind",
+        "="
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "h",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Focus the pane to the left.",
+      "command": "select-pane -L",
+      "rendered": "bind h select-pane -L",
+      "unbind_command": [
+        "unbind",
+        "h"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "n",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Focus the pane below.",
+      "command": "select-pane -D",
+      "rendered": "bind n select-pane -D",
+      "unbind_command": [
+        "unbind",
+        "n"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "e",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Focus the pane above.",
+      "command": "select-pane -U",
+      "rendered": "bind e select-pane -U",
+      "unbind_command": [
+        "unbind",
+        "e"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "i",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Focus the pane to the right.",
+      "command": "select-pane -R",
+      "rendered": "bind i select-pane -R",
+      "unbind_command": [
+        "unbind",
+        "i"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "WheelUpPane",
+      "table": "copy-mode-vi",
+      "repeatable": false,
+      "description": "Scroll up one line in copy-mode-vi.",
+      "command": "send-keys -X -N 1 scroll-up",
+      "rendered": "bind -T copy-mode-vi WheelUpPane send-keys -X -N 1 scroll-up",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "copy-mode-vi",
+        "WheelUpPane"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "WheelDownPane",
+      "table": "copy-mode-vi",
+      "repeatable": false,
+      "description": "Scroll down one line in copy-mode-vi.",
+      "command": "send-keys -X -N 1 scroll-down",
+      "rendered": "bind -T copy-mode-vi WheelDownPane send-keys -X -N 1 scroll-down",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "copy-mode-vi",
+        "WheelDownPane"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "WheelUpPane",
+      "table": "copy-mode",
+      "repeatable": false,
+      "description": "Scroll up one line in copy-mode.",
+      "command": "send-keys -X -N 1 scroll-up",
+      "rendered": "bind -T copy-mode WheelUpPane send-keys -X -N 1 scroll-up",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "copy-mode",
+        "WheelUpPane"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "WheelDownPane",
+      "table": "copy-mode",
+      "repeatable": false,
+      "description": "Scroll down one line in copy-mode.",
+      "command": "send-keys -X -N 1 scroll-down",
+      "rendered": "bind -T copy-mode WheelDownPane send-keys -X -N 1 scroll-down",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "copy-mode",
+        "WheelDownPane"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "WheelUpPane",
+      "table": "root",
+      "repeatable": false,
+      "description": "Pass wheel-up through or enter copy mode and scroll up.",
+      "command": "if-shell -F -t = \"#{?pane_in_mode,1,#{alternate_on}}\" \"send-keys -M\" \"copy-mode -e; send-keys -X -N 1 scroll-up\"",
+      "rendered": "bind -n WheelUpPane if-shell -F -t = \"#{?pane_in_mode,1,#{alternate_on}}\" \"send-keys -M\" \"copy-mode -e; send-keys -X -N 1 scroll-up\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "WheelUpPane"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "WheelDownPane",
+      "table": "root",
+      "repeatable": false,
+      "description": "Pass wheel-down through or scroll copy mode down.",
+      "command": "if-shell -F -t = \"#{?pane_in_mode,1,#{alternate_on}}\" \"send-keys -M\" \"send-keys -X -N 1 scroll-down\"",
+      "rendered": "bind -n WheelDownPane if-shell -F -t = \"#{?pane_in_mode,1,#{alternate_on}}\" \"send-keys -M\" \"send-keys -X -N 1 scroll-down\"",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "WheelDownPane"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "Left",
+      "table": "prefix",
+      "repeatable": true,
+      "description": "Resize the pane left by one cell.",
+      "command": "resize-pane -L 1",
+      "rendered": "bind -r Left resize-pane -L 1",
+      "unbind_command": [
+        "unbind",
+        "Left"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "Down",
+      "table": "prefix",
+      "repeatable": true,
+      "description": "Resize the pane down by one cell.",
+      "command": "resize-pane -D 1",
+      "rendered": "bind -r Down resize-pane -D 1",
+      "unbind_command": [
+        "unbind",
+        "Down"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "Up",
+      "table": "prefix",
+      "repeatable": true,
+      "description": "Resize the pane up by one cell.",
+      "command": "resize-pane -U 1",
+      "rendered": "bind -r Up resize-pane -U 1",
+      "unbind_command": [
+        "unbind",
+        "Up"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "Right",
+      "table": "prefix",
+      "repeatable": true,
+      "description": "Resize the pane right by one cell.",
+      "command": "resize-pane -R 1",
+      "rendered": "bind -r Right resize-pane -R 1",
+      "unbind_command": [
+        "unbind",
+        "Right"
+      ]
+    }
+  ]
+}
