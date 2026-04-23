@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generated_at": "2026-04-23T15:29:49.651748+00:00",
+  "generated_at": "2026-04-23T15:37:57.043616+00:00",
   "config_root": "/Users/iuwoo_pro/devin.m/dotfiles/tmux",
   "bindings": [
     {
@@ -177,9 +177,9 @@
       "key": "K",
       "table": "prefix",
       "repeatable": false,
-      "description": "Kill the current session; switch to next if first, otherwise previous (kill directly if only one).",
-      "command": "confirm-before -p \"Kill session #S & switch to adjacent? (y/n)\" \"run-shell \\\"~/.config/tmux/module/session/kill.sh\\\"\"",
-      "rendered": "bind K confirm-before -p \"Kill session #S & switch to adjacent? (y/n)\" \"run-shell \\\"~/.config/tmux/module/session/kill.sh\\\"\"",
+      "description": "Prompt for a session to kill by sorted index, full name, or label; blank kills the current session.",
+      "command": "command-prompt -p \"Kill session :\" \"run-shell \\\"~/.config/tmux/module/session/kill.sh '%%'\\\"\"",
+      "rendered": "bind K command-prompt -p \"Kill session :\" \"run-shell \\\"~/.config/tmux/module/session/kill.sh '%%'\\\"\"",
       "unbind_command": [
         "unbind",
         "K"

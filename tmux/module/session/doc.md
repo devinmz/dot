@@ -26,12 +26,15 @@
 
 ### 删除 session
 
-- 关闭当前 session：
+- **prefix K**：弹出输入框，支持输入排序索引、完整 session 名或 label。
+- 若**留空**，则删除当前 session。
+- 若删除的是当前 session：
   - 仅有一个 session 时，直接 kill；
   - 当前为排序列表中的**第一个**时，先切换到**下一个**（索引 +1）再 kill；
   - 其余情况先切换到**上一个**（索引 -1）再 kill。
+- 删除后会对剩余 session 重新编号，保持排序前缀连续。
 
-实现：**`helper.py`** 子命令 **`kill-current`**，由 **`kill.sh`** 调用。
+实现：**`helper.py`** 子命令 **`kill`**，由 **`kill.sh`** 调用。
 
 ### detach session
 
@@ -60,7 +63,7 @@
 - `insert-right <anchor_id> <moving_id>`
 - `ensure`
 - `created`
-- `kill-current`
+- `kill [target]`
 - `move-window-to <N>`（1-based）
 
 另外 `init.conf` 中注册了模块版 `session-created` hook，会调用 `created.sh`，在原生新建 session 后自动执行 `created -> ensure`，保持编号连续。
@@ -71,7 +74,7 @@
 |------|------|
 | **`helper.py`** | 模块版 session manager：切换、排序、插入、重命名、关闭、移动 window |
 | `create.sh` | 新建 session；锁文件 **`/tmp/tmux-module-new-session.lock`**（与 `scripts/` 下的 `new_session.sh` 所用锁分开） |
-| `kill.sh` | `kill-current` |
+| `kill.sh` | `kill [target]` |
 | `created.sh` | 模块版 `session-created` hook 入口 |
 | `switch_menu.sh` | 交互选 session |
 | `switch_index.sh` | 调用 `helper.py switch <N>` 的包装脚本 |
@@ -91,7 +94,7 @@ source-file ~/.config/tmux/module/session/init.conf
 | **prefix C** | 提示输入 Session 名，并创建到当前 session 后面 |
 | **prefix S** | 提示输入 Session 名，并创建到 session 列表最后 |
 | **prefix R** | 提示输入新名称，并重命名当前 session |
-| **prefix K** | 确认后关闭当前 session，并切到相邻 session |
+| **prefix K** | 输入要删除的 session；留空则删除当前 session |
 | **prefix D** | detach |
 | **prefix Left** | 当前 session 左移一位 |
 | **prefix Right** | 当前 session 右移一位 |

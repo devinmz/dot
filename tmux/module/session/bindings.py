@@ -28,8 +28,8 @@ def register(registry):
     )
     registry.bind(
         "K",
-        'confirm-before -p "Kill session #S & switch to adjacent? (y/n)" "run-shell \\"~/.config/tmux/module/session/kill.sh\\""',
-        description="Kill the current session; switch to next if first, otherwise previous (kill directly if only one).",
+        'command-prompt -p "Kill session :" "run-shell \\"~/.config/tmux/module/session/kill.sh \'%%\'\\""',
+        description="Prompt for a session to kill by sorted index, full name, or label; blank kills the current session.",
     )
     # registry.bind(
     #     "K",

@@ -4,7 +4,7 @@
 import re
 import subprocess
 import sys
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 
 def run_tmux(args: List[str], check: bool = True, capture: bool = False) -> str:
@@ -71,6 +71,29 @@ def current_session_id() -> str:
 
 def current_window_id() -> str:
     return run_tmux(["display-message", "-p", "#{window_id}"], capture=True)
+
+
+def display_message(message: str) -> None:
+    run_tmux(["display-message", message], check=False)
+
+
+def find_session(target: str, sessions: List[Dict[str, object]]) -> Optional[Dict[str, object]]:
+    raw = target.strip()
+    if not raw:
+        current_id = current_session_id()
+        return next((session for session in sessions if session["id"] == current_id), None)
+
+    if raw.isdigit():
+        index = int(raw)
+        if 1 <= index <= len(sessions):
+            return sessions[index - 1]
+
+    for field in ("id", "name", "label"):
+        for session in sessions:
+            value = session.get(field)
+            if isinstance(value, str) and value == raw:
+                return session
+    return None
 
 
 def command_switch(index_str: str) -> None:
@@ -147,24 +170,43 @@ def command_created() -> None:
     command_ensure()
 
 
-def command_kill_current() -> None:
+def command_kill(target: str = "") -> None:
     sessions = list_sessions()
     if not sessions:
         return
+
+    target_session = find_session(target, sessions)
+    if target_session is None:
+        wanted = target.strip() or "(current)"
+        display_message(f"Session not found: {wanted}")
+        return
+
+    target_id = str(target_session["id"])
     current_id = current_session_id()
+    remaining_sessions = [session for session in sessions if session["id"] != target_id]
+
+    if not remaining_sessions:
+        run_tmux(["kill-session", "-t", target_id], check=False)
+        return
+
     ids = [str(s["id"]) for s in sessions]
     if current_id not in ids:
-        run_tmux(["kill-session"], check=False)
+        apply_order(remaining_sessions)
+        run_tmux(["kill-session", "-t", target_id], check=False)
         return
-    k = ids.index(current_id)
-    if len(sessions) == 1:
-        run_tmux(["kill-session", "-t", current_id], check=False)
-        return
-    # 第一个 session -> 切到下一个；否则 -> 切到前一个
-    target_k = k + 1 if k == 0 else k - 1
-    target_id = ids[target_k]
-    run_tmux(["switch-client", "-t", target_id], check=False)
-    run_tmux(["kill-session", "-t", current_id], check=False)
+
+    if target_id == current_id:
+        k = ids.index(current_id)
+        # 第一个 session -> 切到下一个；否则 -> 切到前一个
+        adjacent_k = k + 1 if k == 0 else k - 1
+        adjacent_id = ids[adjacent_k]
+        apply_order(remaining_sessions)
+        run_tmux(["switch-client", "-t", adjacent_id], check=False)
+        run_tmux(["kill-session", "-t", target_id], check=False)
+    else:
+        apply_order(remaining_sessions)
+        run_tmux(["kill-session", "-t", target_id], check=False)
+
     run_tmux(["refresh-client", "-S"], check=False)
 
 
@@ -205,7 +247,9 @@ def main(argv: List[str]) -> None:
     elif cmd == "rename" and len(argv) >= 3:
         command_rename(argv[2])
     elif cmd == "kill-current":
-        command_kill_current()
+        command_kill()
+    elif cmd == "kill":
+        command_kill(argv[2] if len(argv) >= 3 else "")
     elif cmd == "move-window-to" and len(argv) >= 3:
         command_move_window_to_session(argv[2])
 
