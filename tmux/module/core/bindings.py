@@ -12,7 +12,7 @@ from module.core.bind_api import register_self
 
 def register(registry):
     registry.bind(
-        "r",
+        "L",
         'run-shell "python3 ~/.config/tmux/module/core/bind_registry.py reload"',
         description="Reload tmux config via registry-driven unbind and regenerate flow.",
     )

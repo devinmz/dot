@@ -1,224 +1,19 @@
 {
   "version": 3,
-  "generated_at": "2026-04-23T10:37:18.743048+00:00",
+  "generated_at": "2026-04-23T15:29:49.651748+00:00",
   "config_root": "/Users/iuwoo_pro/devin.m/dotfiles/tmux",
   "bindings": [
     {
       "module": "core.bindings",
-      "key": "r",
+      "key": "L",
       "table": "prefix",
       "repeatable": false,
       "description": "Reload tmux config via registry-driven unbind and regenerate flow.",
       "command": "run-shell \"python3 ~/.config/tmux/module/core/bind_registry.py reload\"",
-      "rendered": "bind r run-shell \"python3 ~/.config/tmux/module/core/bind_registry.py reload\"",
+      "rendered": "bind L run-shell \"python3 ~/.config/tmux/module/core/bind_registry.py reload\"",
       "unbind_command": [
         "unbind",
-        "r"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "G",
-      "table": "prefix",
-      "repeatable": false,
-      "description": "Prompt for a session name and create a session in the current pane path.",
-      "command": "command-prompt -p \"Session name:\" \"run-shell \\\"~/.config/tmux/module/session/create_session.sh '%%' #{q:session_id} #{q:pane_current_path}\\\"\"",
-      "rendered": "bind G command-prompt -p \"Session name:\" \"run-shell \\\"~/.config/tmux/module/session/create_session.sh '%%' #{q:session_id} #{q:pane_current_path}\\\"\"",
-      "unbind_command": [
-        "unbind",
-        "G"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "X",
-      "table": "prefix",
-      "repeatable": false,
-      "description": "Kill the current session after switching to the previous ordered session.",
-      "command": "confirm-before -p \"Kill session #S & switch to previous? (y/n)\" \"run-shell \\\"~/.config/tmux/module/session/kill_session.sh\\\"\"",
-      "rendered": "bind X confirm-before -p \"Kill session #S & switch to previous? (y/n)\" \"run-shell \\\"~/.config/tmux/module/session/kill_session.sh\\\"\"",
-      "unbind_command": [
-        "unbind",
-        "X"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "k",
-      "table": "prefix",
-      "repeatable": false,
-      "description": "Kill the current tmux session with confirmation.",
-      "command": "confirm-before -p \"kill session #S? (y/n)\" kill-session",
-      "rendered": "bind k confirm-before -p \"kill session #S? (y/n)\" kill-session",
-      "unbind_command": [
-        "unbind",
-        "k"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "d",
-      "table": "prefix",
-      "repeatable": false,
-      "description": "Detach the current tmux client.",
-      "command": "detach-client",
-      "rendered": "bind d detach-client",
-      "unbind_command": [
-        "unbind",
-        "d"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "M-s",
-      "table": "root",
-      "repeatable": false,
-      "description": "Open the interactive session chooser.",
-      "command": "run-shell \"~/.config/tmux/module/session/switch_session_menu.sh\"",
-      "rendered": "bind -n M-s run-shell \"~/.config/tmux/module/session/switch_session_menu.sh\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "M-s"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-1",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 1-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 1\"",
-      "rendered": "bind -n C-1 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 1\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-1"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-2",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 2-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 2\"",
-      "rendered": "bind -n C-2 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 2\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-2"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-3",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 3-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 3\"",
-      "rendered": "bind -n C-3 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 3\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-3"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-4",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 4-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 4\"",
-      "rendered": "bind -n C-4 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 4\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-4"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-5",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 5-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 5\"",
-      "rendered": "bind -n C-5 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 5\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-5"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-6",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 6-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 6\"",
-      "rendered": "bind -n C-6 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 6\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-6"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-7",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 7-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 7\"",
-      "rendered": "bind -n C-7 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 7\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-7"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-8",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 8-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 8\"",
-      "rendered": "bind -n C-8 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 8\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-8"
-      ]
-    },
-    {
-      "module": "session.bindings",
-      "key": "C-9",
-      "table": "root",
-      "repeatable": false,
-      "description": "Switch to the session whose name starts with 9-.",
-      "command": "run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 9\"",
-      "rendered": "bind -n C-9 run-shell -b \"~/.config/tmux/module/session/switch_session_by_index.sh 9\"",
-      "unbind_command": [
-        "unbind",
-        "-n",
-        "C-9"
-      ]
-    },
-    {
-      "module": "window.bindings",
-      "key": "C",
-      "table": "prefix",
-      "repeatable": false,
-      "description": "Prompt for a window name and create it in the current pane path.",
-      "command": "command-prompt -p \"窗口名:\" \"new-window -c '#{pane_current_path}' -n '%%'\"",
-      "rendered": "bind C command-prompt -p \"窗口名:\" \"new-window -c '#{pane_current_path}' -n '%%'\"",
-      "unbind_command": [
-        "unbind",
-        "C"
+        "L"
       ]
     },
     {
@@ -336,6 +131,261 @@
       "unbind_command": [
         "unbind",
         "9"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a session name and create a session right after the current session.",
+      "command": "command-prompt -p \"Session name:\" \"run-shell \\\"~/.config/tmux/module/session/create.sh after-current '%%' #{q:session_id} #{q:pane_current_path}\\\"\"",
+      "rendered": "bind C command-prompt -p \"Session name:\" \"run-shell \\\"~/.config/tmux/module/session/create.sh after-current '%%' #{q:session_id} #{q:pane_current_path}\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "C"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "S",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a session name and create a session at the end of the session list.",
+      "command": "command-prompt -p \"Session name:\" \"run-shell \\\"~/.config/tmux/module/session/create.sh append-last '%%' #{q:session_id} #{q:pane_current_path}\\\"\"",
+      "rendered": "bind S command-prompt -p \"Session name:\" \"run-shell \\\"~/.config/tmux/module/session/create.sh append-last '%%' #{q:session_id} #{q:pane_current_path}\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "S"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "R",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a new name and rename the current tmux session.",
+      "command": "command-prompt -I \"#{session_name}\" -p \"Session name:\" \"rename-session -- '%%'\"",
+      "rendered": "bind R command-prompt -I \"#{session_name}\" -p \"Session name:\" \"rename-session -- '%%'\"",
+      "unbind_command": [
+        "unbind",
+        "R"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "K",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Kill the current session; switch to next if first, otherwise previous (kill directly if only one).",
+      "command": "confirm-before -p \"Kill session #S & switch to adjacent? (y/n)\" \"run-shell \\\"~/.config/tmux/module/session/kill.sh\\\"\"",
+      "rendered": "bind K confirm-before -p \"Kill session #S & switch to adjacent? (y/n)\" \"run-shell \\\"~/.config/tmux/module/session/kill.sh\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "K"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "D",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Detach the current tmux client.",
+      "command": "detach-client",
+      "rendered": "bind D detach-client",
+      "unbind_command": [
+        "unbind",
+        "D"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "Left",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Move the current session one position to the left in the ordered session list.",
+      "command": "run-shell -b \"python3 ~/.config/tmux/module/session/helper.py move left\"",
+      "rendered": "bind Left run-shell -b \"python3 ~/.config/tmux/module/session/helper.py move left\"",
+      "unbind_command": [
+        "unbind",
+        "Left"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "Right",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Move the current session one position to the right in the ordered session list.",
+      "command": "run-shell -b \"python3 ~/.config/tmux/module/session/helper.py move right\"",
+      "rendered": "bind Right run-shell -b \"python3 ~/.config/tmux/module/session/helper.py move right\"",
+      "unbind_command": [
+        "unbind",
+        "Right"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "C-l",
+      "table": "root",
+      "repeatable": false,
+      "description": "Enter the session-switch key table; press digits to jump or arrows to reorder sessions.",
+      "command": "switch-client -T session-switch",
+      "rendered": "bind -n C-l switch-client -T session-switch",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-l"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "1",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Switch to the session at sorted index 1 after pressing Ctrl+l.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_index.sh 1\"",
+      "rendered": "bind -T session-switch 1 run-shell -b \"~/.config/tmux/module/session/switch_index.sh 1\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "1"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "2",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Switch to the session at sorted index 2 after pressing Ctrl+l.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_index.sh 2\"",
+      "rendered": "bind -T session-switch 2 run-shell -b \"~/.config/tmux/module/session/switch_index.sh 2\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "2"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "3",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Switch to the session at sorted index 3 after pressing Ctrl+l.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_index.sh 3\"",
+      "rendered": "bind -T session-switch 3 run-shell -b \"~/.config/tmux/module/session/switch_index.sh 3\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "3"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "4",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Switch to the session at sorted index 4 after pressing Ctrl+l.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_index.sh 4\"",
+      "rendered": "bind -T session-switch 4 run-shell -b \"~/.config/tmux/module/session/switch_index.sh 4\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "4"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "5",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Switch to the session at sorted index 5 after pressing Ctrl+l.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_index.sh 5\"",
+      "rendered": "bind -T session-switch 5 run-shell -b \"~/.config/tmux/module/session/switch_index.sh 5\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "5"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "6",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Switch to the session at sorted index 6 after pressing Ctrl+l.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_index.sh 6\"",
+      "rendered": "bind -T session-switch 6 run-shell -b \"~/.config/tmux/module/session/switch_index.sh 6\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "6"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "7",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Switch to the session at sorted index 7 after pressing Ctrl+l.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_index.sh 7\"",
+      "rendered": "bind -T session-switch 7 run-shell -b \"~/.config/tmux/module/session/switch_index.sh 7\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "7"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "8",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Switch to the session at sorted index 8 after pressing Ctrl+l.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_index.sh 8\"",
+      "rendered": "bind -T session-switch 8 run-shell -b \"~/.config/tmux/module/session/switch_index.sh 8\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "8"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "Left",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Move the current session one position to the left and stay in the session-switch key table.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_move.sh left\"",
+      "rendered": "bind -T session-switch Left run-shell -b \"~/.config/tmux/module/session/switch_move.sh left\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "Left"
+      ]
+    },
+    {
+      "module": "session.bindings",
+      "key": "Right",
+      "table": "session-switch",
+      "repeatable": false,
+      "description": "Move the current session one position to the right and stay in the session-switch key table.",
+      "command": "run-shell -b \"~/.config/tmux/module/session/switch_move.sh right\"",
+      "rendered": "bind -T session-switch Right run-shell -b \"~/.config/tmux/module/session/switch_move.sh right\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "session-switch",
+        "Right"
       ]
     },
     {
@@ -506,19 +556,6 @@
     },
     {
       "module": "pane.bindings",
-      "key": "Left",
-      "table": "prefix",
-      "repeatable": true,
-      "description": "Resize the pane left by one cell.",
-      "command": "resize-pane -L 1",
-      "rendered": "bind -r Left resize-pane -L 1",
-      "unbind_command": [
-        "unbind",
-        "Left"
-      ]
-    },
-    {
-      "module": "pane.bindings",
       "key": "Down",
       "table": "prefix",
       "repeatable": true,
@@ -541,19 +578,6 @@
       "unbind_command": [
         "unbind",
         "Up"
-      ]
-    },
-    {
-      "module": "pane.bindings",
-      "key": "Right",
-      "table": "prefix",
-      "repeatable": true,
-      "description": "Resize the pane right by one cell.",
-      "command": "resize-pane -R 1",
-      "rendered": "bind -r Right resize-pane -R 1",
-      "unbind_command": [
-        "unbind",
-        "Right"
       ]
     }
   ]

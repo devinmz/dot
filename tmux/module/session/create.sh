@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Args: [session_label] [current_session_id] [pane_current_path]
-# Session module only — uses session_helper.py (not tmux/scripts).
+# Args: [mode] [session_label] [current_session_id] [pane_current_path]
+# Session module only — uses helper.py (not tmux/scripts).
 
 _modroot="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-label="${1:-}"
-current_session_id="${2:-}"
-current_path="${3:-}"
+mode="${1:-append-last}"
+label="${2:-}"
+current_session_id="${3:-}"
+current_path="${4:-}"
 
 LOCK="/tmp/tmux-module-new-session.lock"
 touch "$LOCK"
@@ -28,11 +29,18 @@ if [ -z "$session_id" ]; then
   exit 0
 fi
 
-if [ -n "$current_session_id" ]; then
-  python3 "$_modroot/session_helper.py" insert-right "$current_session_id" "$session_id"
-else
-  python3 "$_modroot/session_helper.py" ensure
-fi
+case "$mode" in
+  after-current)
+    if [[ -n "$current_session_id" ]]; then
+      python3 "$_modroot/helper.py" insert-right "$current_session_id" "$session_id"
+    else
+      python3 "$_modroot/helper.py" ensure
+    fi
+    ;;
+  append-last|*)
+    python3 "$_modroot/helper.py" ensure
+    ;;
+esac
 
 rm -f "$LOCK"
 
@@ -40,5 +48,5 @@ tmux switch-client -t "$session_id"
 
 normalized=$(printf '%s' "$label" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 if [[ -n "$normalized" ]]; then
-  python3 "$_modroot/session_helper.py" rename "$normalized"
+  python3 "$_modroot/helper.py" rename "$normalized"
 fi

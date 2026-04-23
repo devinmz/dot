@@ -69,6 +69,24 @@ def current_session_id() -> str:
     return run_tmux(["display-message", "-p", "#{session_id}"], capture=True)
 
 
+def current_window_id() -> str:
+    return run_tmux(["display-message", "-p", "#{window_id}"], capture=True)
+
+
+def command_switch(index_str: str) -> None:
+    try:
+        index = int(index_str)
+    except ValueError:
+        return
+    if index < 1:
+        return
+    sessions = list_sessions()
+    if index > len(sessions):
+        return
+    run_tmux(["switch-client", "-t", sessions[index - 1]["id"]], check=False)
+    run_tmux(["refresh-client", "-S"], check=False)
+
+
 def command_ensure() -> None:
     sessions = list_sessions()
     if sessions:
@@ -108,6 +126,27 @@ def command_insert_right(anchor_id: str, moving_id: str) -> None:
     apply_order(sessions)
 
 
+def command_move(direction: str) -> None:
+    direction = direction.lower()
+    sessions = list_sessions()
+    current_id = current_session_id()
+    indices = {session["id"]: idx for idx, session in enumerate(sessions)}
+    if current_id not in indices:
+        return
+    pos = indices[current_id]
+    if direction == "left" and pos > 0:
+        sessions[pos - 1], sessions[pos] = sessions[pos], sessions[pos - 1]
+    elif direction == "right" and pos < len(sessions) - 1:
+        sessions[pos], sessions[pos + 1] = sessions[pos + 1], sessions[pos]
+    else:
+        return
+    apply_order(sessions)
+
+
+def command_created() -> None:
+    command_ensure()
+
+
 def command_kill_current() -> None:
     sessions = list_sessions()
     if not sessions:
@@ -121,25 +160,54 @@ def command_kill_current() -> None:
     if len(sessions) == 1:
         run_tmux(["kill-session", "-t", current_id], check=False)
         return
-    prev_k = k - 1 if k > 0 else len(sessions) - 1
-    target_id = ids[prev_k]
+    # 第一个 session -> 切到下一个；否则 -> 切到前一个
+    target_k = k + 1 if k == 0 else k - 1
+    target_id = ids[target_k]
     run_tmux(["switch-client", "-t", target_id], check=False)
     run_tmux(["kill-session", "-t", current_id], check=False)
     run_tmux(["refresh-client", "-S"], check=False)
+
+
+def command_move_window_to_session(index_str: str) -> None:
+    try:
+        index = int(index_str)
+    except ValueError:
+        return
+    if index < 1:
+        return
+    sessions = list_sessions()
+    if index > len(sessions):
+        return
+    target_session_id = sessions[index - 1]["id"]
+    source_window_id = current_window_id()
+    if not source_window_id:
+        return
+    current_id = current_session_id()
+    if target_session_id != current_id:
+        run_tmux(["move-window", "-s", source_window_id, "-t", f"{target_session_id}:"], check=False)
+    run_tmux(["switch-client", "-t", target_session_id], check=False)
 
 
 def main(argv: List[str]) -> None:
     if len(argv) < 2:
         return
     cmd = argv[1]
-    if cmd == "insert-right" and len(argv) >= 4:
+    if cmd == "switch" and len(argv) >= 3:
+        command_switch(argv[2])
+    elif cmd == "insert-right" and len(argv) >= 4:
         command_insert_right(argv[2], argv[3])
+    elif cmd == "move" and len(argv) >= 3:
+        command_move(argv[2])
     elif cmd == "ensure":
         command_ensure()
+    elif cmd == "created":
+        command_created()
     elif cmd == "rename" and len(argv) >= 3:
         command_rename(argv[2])
     elif cmd == "kill-current":
         command_kill_current()
+    elif cmd == "move-window-to" and len(argv) >= 3:
+        command_move_window_to_session(argv[2])
 
 
 if __name__ == "__main__":

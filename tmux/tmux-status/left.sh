@@ -5,6 +5,8 @@ current_session_id="${1:-}"
 current_session_name="${2:-}"
 term_width="${3:-}"
 status_bg="${4:-}"
+prefix_active="${5:-0}"
+client_key_table="${6:-prefix}"
 
 [[ -z "$status_bg" || "$status_bg" == "default" ]] && status_bg=black
 [[ ! "$term_width" =~ ^[0-9]+$ ]] && term_width=100
@@ -13,6 +15,8 @@ inactive_bg="#373b41"
 inactive_fg="#c5c8c6"
 active_bg="${TMUX_THEME_COLOR:-#b294bb}"
 active_fg="#1d1f21"
+prefix_bg="#81a2be"
+prefix_fg="#1d1f21"
 separator=""
 left_cap="█"
 max_width=18
@@ -105,6 +109,19 @@ get_session_icon() {
 rendered=""
 prev_bg=""
 current_session_id_norm=$(normalize_session_id "$current_session_id")
+
+rendered+="#[fg=${prefix_bg},bg=${status_bg}]${left_cap}"
+if [[ "$client_key_table" == "session-switch" ]]; then
+  rendered+="#[fg=${prefix_fg},bg=${prefix_bg}] ⇆  "
+  prev_bg="$prefix_bg"
+elif [[ "$prefix_active" == "1" ]]; then
+  rendered+="#[fg=${prefix_fg},bg=${prefix_bg}] ⌨  "
+  prev_bg="$prefix_bg"
+else
+  rendered+="#[fg=${prefix_fg},bg=${prefix_bg}] ～ "
+  prev_bg="$prefix_bg"
+fi
+
 while IFS= read -r entry; do
   [[ -z "$entry" ]] && continue
   session_id="${entry%%::*}"

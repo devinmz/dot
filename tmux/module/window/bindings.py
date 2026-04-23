@@ -11,11 +11,11 @@ from module.core.bind_api import register_self
 
 
 def register(registry):
-    registry.bind(
-        "C",
-        'command-prompt -p "窗口名:" "new-window -c \'#{pane_current_path}\' -n \'%%\'"',
-        description="Prompt for a window name and create it in the current pane path.",
-    )
+    # registry.bind(
+    #     "C",
+    #     'command-prompt -p "窗口名:" "new-window -c \'#{pane_current_path}\' -n \'%%\'"',
+    #     description="Prompt for a window name and create it in the current pane path.",
+    # )
     for idx in range(1, 10):
         registry.bind(
             str(idx),

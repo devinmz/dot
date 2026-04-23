@@ -53,10 +53,8 @@ def register(registry):
         table="root",
         description="Pass wheel-down through or scroll copy mode down.",
     )
-    registry.bind("Left", "resize-pane -L 1", repeatable=True, description="Resize the pane left by one cell.")
     registry.bind("Down", "resize-pane -D 1", repeatable=True, description="Resize the pane down by one cell.")
     registry.bind("Up", "resize-pane -U 1", repeatable=True, description="Resize the pane up by one cell.")
-    registry.bind("Right", "resize-pane -R 1", repeatable=True, description="Resize the pane right by one cell.")
 
 
 if __name__ == "__main__":
