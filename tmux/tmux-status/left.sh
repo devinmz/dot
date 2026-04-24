@@ -114,6 +114,9 @@ rendered+="#[fg=${prefix_bg},bg=${status_bg}]${left_cap}"
 if [[ "$client_key_table" == "session-switch" ]]; then
   rendered+="#[fg=${prefix_fg},bg=${prefix_bg}] ⇆  "
   prev_bg="$prefix_bg"
+elif [[ "$client_key_table" == "window-switch" ]]; then
+  rendered+="#[fg=${prefix_fg},bg=${prefix_bg}] ◫  "
+  prev_bg="$prefix_bg"
 elif [[ "$prefix_active" == "1" ]]; then
   rendered+="#[fg=${prefix_fg},bg=${prefix_bg}] ⌨  "
   prev_bg="$prefix_bg"

@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generated_at": "2026-04-23T15:37:57.043616+00:00",
+  "generated_at": "2026-04-24T10:36:21.651342+00:00",
   "config_root": "/Users/iuwoo_pro/devin.m/dotfiles/tmux",
   "bindings": [
     {
@@ -14,6 +14,58 @@
       "unbind_command": [
         "unbind",
         "L"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "c",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a window name and create it right after the current window.",
+      "command": "command-prompt -p \"Window name:\" \"run-shell \\\"~/.config/tmux/module/window/create.sh after-current '%%' #{q:pane_current_path}\\\"\"",
+      "rendered": "bind c command-prompt -p \"Window name:\" \"run-shell \\\"~/.config/tmux/module/window/create.sh after-current '%%' #{q:pane_current_path}\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "c"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "s",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a window name and create it at the end of the window list.",
+      "command": "command-prompt -p \"Window name:\" \"run-shell \\\"~/.config/tmux/module/window/create.sh append-last '%%' #{q:pane_current_path}\\\"\"",
+      "rendered": "bind s command-prompt -p \"Window name:\" \"run-shell \\\"~/.config/tmux/module/window/create.sh append-last '%%' #{q:pane_current_path}\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "s"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "r",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a new name and rename the current tmux window.",
+      "command": "command-prompt -I \"#{window_name}\" -p \"Window name:\" \"run-shell \\\"python3 ~/.config/tmux/module/window/helper.py rename '%%'\\\"\"",
+      "rendered": "bind r command-prompt -I \"#{window_name}\" -p \"Window name:\" \"run-shell \\\"python3 ~/.config/tmux/module/window/helper.py rename '%%'\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "r"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "k",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Prompt for a window to kill by index or name; blank kills the current window.",
+      "command": "command-prompt -p \"Kill window :\" \"run-shell \\\"~/.config/tmux/module/window/kill.sh '%%'\\\"\"",
+      "rendered": "bind k command-prompt -p \"Kill window :\" \"run-shell \\\"~/.config/tmux/module/window/kill.sh '%%'\\\"\"",
+      "unbind_command": [
+        "unbind",
+        "k"
       ]
     },
     {
@@ -131,6 +183,185 @@
       "unbind_command": [
         "unbind",
         "9"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "C-n",
+      "table": "root",
+      "repeatable": false,
+      "description": "Enter the window-switch key table; press digits to jump or arrows to reorder windows.",
+      "command": "switch-client -T window-switch",
+      "rendered": "bind -n C-n switch-client -T window-switch",
+      "unbind_command": [
+        "unbind",
+        "-n",
+        "C-n"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "1",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 1 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 1\"",
+      "rendered": "bind -T window-switch 1 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 1\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "1"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "2",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 2 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 2\"",
+      "rendered": "bind -T window-switch 2 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 2\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "2"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "3",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 3 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 3\"",
+      "rendered": "bind -T window-switch 3 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 3\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "3"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "4",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 4 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 4\"",
+      "rendered": "bind -T window-switch 4 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 4\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "4"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "5",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 5 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 5\"",
+      "rendered": "bind -T window-switch 5 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 5\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "5"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "6",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 6 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 6\"",
+      "rendered": "bind -T window-switch 6 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 6\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "6"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "7",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 7 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 7\"",
+      "rendered": "bind -T window-switch 7 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 7\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "7"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "8",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 8 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 8\"",
+      "rendered": "bind -T window-switch 8 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 8\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "8"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "9",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Switch to window 9 after pressing Ctrl+w.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_index.sh 9\"",
+      "rendered": "bind -T window-switch 9 run-shell -b \"~/.config/tmux/module/window/switch_index.sh 9\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "9"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "Left",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Move the current window one position to the left and stay in the window-switch key table.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_move.sh left\"",
+      "rendered": "bind -T window-switch Left run-shell -b \"~/.config/tmux/module/window/switch_move.sh left\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "Left"
+      ]
+    },
+    {
+      "module": "window.bindings",
+      "key": "Right",
+      "table": "window-switch",
+      "repeatable": false,
+      "description": "Move the current window one position to the right and stay in the window-switch key table.",
+      "command": "run-shell -b \"~/.config/tmux/module/window/switch_move.sh right\"",
+      "rendered": "bind -T window-switch Right run-shell -b \"~/.config/tmux/module/window/switch_move.sh right\"",
+      "unbind_command": [
+        "unbind",
+        "-T",
+        "window-switch",
+        "Right"
       ]
     },
     {
