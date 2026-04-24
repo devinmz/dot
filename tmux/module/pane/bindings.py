@@ -13,10 +13,10 @@ from module.core.bind_api import register_self
 def register(registry):
     registry.bind("-", 'split-window -v -c "#{pane_current_path}"', description="Split the current pane vertically.")
     registry.bind("=", 'split-window -h -c "#{pane_current_path}"', description="Split the current pane horizontally.")
-    registry.bind("h", "select-pane -L", description="Focus the pane to the left.")
-    registry.bind("n", "select-pane -D", description="Focus the pane below.")
-    registry.bind("e", "select-pane -U", description="Focus the pane above.")
-    registry.bind("i", "select-pane -R", description="Focus the pane to the right.")
+    registry.bind("h", "select-pane -L", repeatable=True, description="Focus the pane to the left.")
+    registry.bind("n", "select-pane -D", repeatable=True, description="Focus the pane below.")
+    registry.bind("e", "select-pane -U", repeatable=True, description="Focus the pane above.")
+    registry.bind("i", "select-pane -R", repeatable=True, description="Focus the pane to the right.")
     registry.bind(
         "WheelUpPane",
         "send-keys -X -N 1 scroll-up",
@@ -53,6 +53,8 @@ def register(registry):
         table="root",
         description="Pass wheel-down through or scroll copy mode down.",
     )
+    registry.bind("Left", "resize-pane -L 1", table="prefix", repeatable=True, description="Resize the pane left by one cell.")
+    registry.bind("Right", "resize-pane -R 1", table="prefix", repeatable=True, description="Resize the pane right by one cell.")
     registry.bind("Down", "resize-pane -D 1", repeatable=True, description="Resize the pane down by one cell.")
     registry.bind("Up", "resize-pane -U 1", repeatable=True, description="Resize the pane up by one cell.")
 

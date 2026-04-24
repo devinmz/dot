@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generated_at": "2026-04-24T10:36:21.651342+00:00",
+  "generated_at": "2026-04-24T10:53:30.339240+00:00",
   "config_root": "/Users/iuwoo_pro/devin.m/dotfiles/tmux",
   "bindings": [
     {
@@ -430,26 +430,26 @@
       ]
     },
     {
-      "module": "session.bindings",
+      "module": "pane.bindings",
       "key": "Left",
       "table": "prefix",
-      "repeatable": false,
-      "description": "Move the current session one position to the left in the ordered session list.",
-      "command": "run-shell -b \"python3 ~/.config/tmux/module/session/helper.py move left\"",
-      "rendered": "bind Left run-shell -b \"python3 ~/.config/tmux/module/session/helper.py move left\"",
+      "repeatable": true,
+      "description": "Resize the pane left by one cell.",
+      "command": "resize-pane -L 1",
+      "rendered": "bind -r Left resize-pane -L 1",
       "unbind_command": [
         "unbind",
         "Left"
       ]
     },
     {
-      "module": "session.bindings",
+      "module": "pane.bindings",
       "key": "Right",
       "table": "prefix",
-      "repeatable": false,
-      "description": "Move the current session one position to the right in the ordered session list.",
-      "command": "run-shell -b \"python3 ~/.config/tmux/module/session/helper.py move right\"",
-      "rendered": "bind Right run-shell -b \"python3 ~/.config/tmux/module/session/helper.py move right\"",
+      "repeatable": true,
+      "description": "Resize the pane right by one cell.",
+      "command": "resize-pane -R 1",
+      "rendered": "bind -r Right resize-pane -R 1",
       "unbind_command": [
         "unbind",
         "Right"
@@ -649,10 +649,10 @@
       "module": "pane.bindings",
       "key": "h",
       "table": "prefix",
-      "repeatable": false,
+      "repeatable": true,
       "description": "Focus the pane to the left.",
       "command": "select-pane -L",
-      "rendered": "bind h select-pane -L",
+      "rendered": "bind -r h select-pane -L",
       "unbind_command": [
         "unbind",
         "h"
@@ -662,10 +662,10 @@
       "module": "pane.bindings",
       "key": "n",
       "table": "prefix",
-      "repeatable": false,
+      "repeatable": true,
       "description": "Focus the pane below.",
       "command": "select-pane -D",
-      "rendered": "bind n select-pane -D",
+      "rendered": "bind -r n select-pane -D",
       "unbind_command": [
         "unbind",
         "n"
@@ -675,10 +675,10 @@
       "module": "pane.bindings",
       "key": "e",
       "table": "prefix",
-      "repeatable": false,
+      "repeatable": true,
       "description": "Focus the pane above.",
       "command": "select-pane -U",
-      "rendered": "bind e select-pane -U",
+      "rendered": "bind -r e select-pane -U",
       "unbind_command": [
         "unbind",
         "e"
@@ -688,10 +688,10 @@
       "module": "pane.bindings",
       "key": "i",
       "table": "prefix",
-      "repeatable": false,
+      "repeatable": true,
       "description": "Focus the pane to the right.",
       "command": "select-pane -R",
-      "rendered": "bind i select-pane -R",
+      "rendered": "bind -r i select-pane -R",
       "unbind_command": [
         "unbind",
         "i"
