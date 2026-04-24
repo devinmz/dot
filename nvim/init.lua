@@ -40,8 +40,12 @@ vim.o.incsearch = true
 vim.o.cmdheight = 1
 -- 自动加载外部修改
 vim.o.autoread = true
--- 禁止折行
-vim.wo.wrap = false
+-- 软换行（超长行折行显示，不修改文件内容）
+vim.wo.wrap = true
+-- 折行时在单词边界断开，避免单词被截断
+vim.wo.linebreak = true
+-- 折行后保持与起始行相同的缩进
+vim.wo.breakindent = true
 -- 光标在行首尾时<Left><Right>可以跳到下一行
 vim.o.whichwrap = "<,>,[,]"
 -- 允许隐藏被修改过的buffer
