@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "generated_at": "2026-04-24T10:53:30.339240+00:00",
+  "generated_at": "2026-04-25T01:50:49.080518+00:00",
   "config_root": "/Users/iuwoo_pro/devin.m/dotfiles/tmux",
   "bindings": [
     {
@@ -695,6 +695,58 @@
       "unbind_command": [
         "unbind",
         "i"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "H",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Swap the current pane with the pane on the left.",
+      "command": "run-shell -b \"~/.config/tmux/module/pane/swap.sh left\"",
+      "rendered": "bind H run-shell -b \"~/.config/tmux/module/pane/swap.sh left\"",
+      "unbind_command": [
+        "unbind",
+        "H"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "N",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Swap the current pane with the pane below.",
+      "command": "run-shell -b \"~/.config/tmux/module/pane/swap.sh down\"",
+      "rendered": "bind N run-shell -b \"~/.config/tmux/module/pane/swap.sh down\"",
+      "unbind_command": [
+        "unbind",
+        "N"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "E",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Swap the current pane with the pane above.",
+      "command": "run-shell -b \"~/.config/tmux/module/pane/swap.sh up\"",
+      "rendered": "bind E run-shell -b \"~/.config/tmux/module/pane/swap.sh up\"",
+      "unbind_command": [
+        "unbind",
+        "E"
+      ]
+    },
+    {
+      "module": "pane.bindings",
+      "key": "I",
+      "table": "prefix",
+      "repeatable": false,
+      "description": "Swap the current pane with the pane on the right.",
+      "command": "run-shell -b \"~/.config/tmux/module/pane/swap.sh right\"",
+      "rendered": "bind I run-shell -b \"~/.config/tmux/module/pane/swap.sh right\"",
+      "unbind_command": [
+        "unbind",
+        "I"
       ]
     },
     {

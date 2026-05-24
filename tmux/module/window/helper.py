@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Window helpers for tmux/module/window."""
+"""window API"""
 
 import subprocess
 import sys

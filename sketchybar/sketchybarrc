@@ -1,0 +1,13 @@
+#!/usr/bin/env lua
+
+local config_dir = debug.getinfo(1, "S").source:sub(2):match("(.*/)")
+local lua_paths = {}
+for path in package.path:gmatch("[^;]+") do
+    if path ~= "./?.lua" and path ~= "./?/init.lua" then
+        table.insert(lua_paths, path)
+    end
+end
+package.path = config_dir .. "?.lua;" .. config_dir .. "?/init.lua;" .. table.concat(lua_paths, ";")
+
+-- Load the sketchybar-package and prepare the helper binaries
+require("init")

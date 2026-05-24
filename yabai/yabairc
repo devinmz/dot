@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+
+# Minimal yabai setup: use BSP tiling by default.
+yabai -m config layout bsp
+yabai -m config auto_balance off
+yabai -m config window_placement second_child
+yabai -m config mouse_follows_focus off
+yabai -m config focus_follows_mouse off
+yabai -m config window_gap 10
+yabai -m config top_padding 16
+yabai -m config bottom_padding 8
+yabai -m config left_padding 8
+yabai -m config right_padding 8
+
+# Apply tiling to the currently focused space immediately.
+yabai -m space --layout bsp
+
+# Highlight the focused window with an external border overlay.
+if command -v borders >/dev/null 2>&1; then
+  pkill -x borders >/dev/null 2>&1 || true
+  borders &
+fi
+
+# Always-float app rules
+yabai -m rule --add app="^企业微信$" manage=off
+# End always-float app rules

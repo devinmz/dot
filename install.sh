@@ -10,6 +10,12 @@ BACKUP_DIR="${BACKUP_ROOT}/${TIMESTAMP}"
 
 SOURCE_PATHS=(
   "${REPO_DIR}/nvim"
+  "${REPO_DIR}/borders"
+  "${REPO_DIR}/yabai"
+  "${REPO_DIR}/skhd"
+  "${REPO_DIR}/yabai/yabairc"
+  "${REPO_DIR}/skhd/skhdrc"
+  "${REPO_DIR}/sketchybar"
   "${REPO_DIR}/starship"
   "${REPO_DIR}/zellij"
   "${REPO_DIR}/zsh/.zshrc"
@@ -17,6 +23,12 @@ SOURCE_PATHS=(
 
 DEST_PATHS=(
   "${CONFIG_DIR}/nvim"
+  "${CONFIG_DIR}/borders"
+  "${CONFIG_DIR}/yabai"
+  "${CONFIG_DIR}/skhd"
+  "${HOME}/.yabairc"
+  "${HOME}/.skhdrc"
+  "${CONFIG_DIR}/sketchybar"
   "${CONFIG_DIR}/starship"
   "${CONFIG_DIR}/zellij"
   "${HOME}/.zshrc"

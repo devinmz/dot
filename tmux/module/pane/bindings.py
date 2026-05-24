@@ -9,7 +9,6 @@ if str(TMUX_ROOT) not in sys.path:
 
 from module.core.bind_api import register_self
 
-
 def register(registry):
     registry.bind("-", 'split-window -v -c "#{pane_current_path}"', description="Split the current pane vertically.")
     registry.bind("=", 'split-window -h -c "#{pane_current_path}"', description="Split the current pane horizontally.")
@@ -17,6 +16,10 @@ def register(registry):
     registry.bind("n", "select-pane -D", repeatable=True, description="Focus the pane below.")
     registry.bind("e", "select-pane -U", repeatable=True, description="Focus the pane above.")
     registry.bind("i", "select-pane -R", repeatable=True, description="Focus the pane to the right.")
+    registry.bind("H", 'run-shell -b "~/.config/tmux/module/pane/swap.sh left"', description="Swap the current pane with the pane on the left.")
+    registry.bind("N", 'run-shell -b "~/.config/tmux/module/pane/swap.sh down"', description="Swap the current pane with the pane below.")
+    registry.bind("E", 'run-shell -b "~/.config/tmux/module/pane/swap.sh up"', description="Swap the current pane with the pane above.")
+    registry.bind("I", 'run-shell -b "~/.config/tmux/module/pane/swap.sh right"', description="Swap the current pane with the pane on the right.")
     registry.bind(
         "WheelUpPane",
         "send-keys -X -N 1 scroll-up",
